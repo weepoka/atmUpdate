@@ -1,0 +1,8 @@
+/* the slides */
+.slick-slider {
+  overflow: hidden !important;
+}
+
+.slick-slider .slick-slide {
+  padding: 0 15px !important;
+}
