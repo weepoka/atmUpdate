@@ -9,16 +9,10 @@ import Api from "../HomePage/Api";
 
 import {
   Card,
-
   Typography,
-
   CardBody,
   Chip,
-
   Avatar,
-
-
-
 } from "@material-tailwind/react";
 const data = {
   series: [
@@ -78,11 +72,16 @@ const data = {
   },
 };
 
-const TABLE_HEAD = ["Course", "Start date", "Duration", "Total Student", "Status",];
+const TABLE_HEAD = [
+  "Course",
+  "Start date",
+  "Duration",
+  "Total Student",
+  "Status",
+];
 
 const TABLE_ROWS = [
   {
-
     name: "Spotify",
     amount: "$2,500",
     date: "Wed 3:00pm",
@@ -146,33 +145,28 @@ const Dashboard = () => {
   //############ Count visitor start #############
   const vsitor = async () => {
     try {
+      const res = await Api.get(`/atms/api/v1/visitor`);
 
-
-      const res = await Api.get(`/atms/api/v1/visitor`)
-
-      setVisit(res.data.data)
-      const std = await Api.get(`/atms/api/v1/all-student`)
-      setStd(std.data.message)
-      const cur = await Api.get(`/atms/api/v1/course`)
-      setKo(cur.data.data)
-      setKur(cur.data.data.length)
-      const empp = await Api.get(`/atms/api/v1/employee`)
-      setEmp(empp.data.length)
-      const qrr = await Api.get(`/atms/api/v1/query`)
-      setQr(qrr.data.length)
-      const today = await Api.get(`/atms/api/v1/appointment-today`)
-      setTo(today.data.data.length)
-
+      setVisit(res.data.data);
+      const std = await Api.get(`/atms/api/v1/all-student`);
+      setStd(std.data.message);
+      const cur = await Api.get(`/atms/api/v1/course`);
+      setKo(cur.data.data);
+      setKur(cur.data.data.length);
+      const empp = await Api.get(`/atms/api/v1/employee`);
+      setEmp(empp.data.length);
+      const qrr = await Api.get(`/atms/api/v1/query`);
+      setQr(qrr.data.length);
+      const today = await Api.get(`/atms/api/v1/appointment-today`);
+      setTo(today.data.data.length);
     } catch (error) {
-      console.error("We got error:", error)
+      console.error("We got error:", error);
     }
-  }
+  };
   useEffect(() => {
-
-    vsitor()
-
-  }, [])
-  console.log("visit:", visit)
+    vsitor();
+  }, []);
+  console.log("visit:", visit);
   //############ Count visitor end ###############
 
   //######### log #######
@@ -284,7 +278,7 @@ const Dashboard = () => {
       </div>
       <div></div>
 
-      <div className="grid grid-cols-2 xl:grid-cols-1 gap-5 py-10">
+      <div className="grid grid-cols-1 gap-5 py-10">
         {/* <div className="">
           <ReactApexChart
             options={state.options}
@@ -308,8 +302,11 @@ const Dashboard = () => {
       </div>
 
       <section className="py-10">
-        <Card className=" lg:w-full md:w-[80%] w-[300px]">
-          <CardBody className="overflow-x-visible  overflow-auto  px-0">
+        <Card className=" lg:w-full md:w-[80%] w-[350px]">
+          <CardBody
+            className="overflow-x-visible 
+           overflow-auto  px-0"
+          >
             <table className="w-full min-w-max table-auto text-left">
               <thead>
                 <tr>
@@ -338,9 +335,7 @@ const Dashboard = () => {
                       courseDuration,
                       totalBuyerList,
                       onLine,
-                      offLine
-
-
+                      offLine,
                     },
                     index
                   ) => {
@@ -351,7 +346,6 @@ const Dashboard = () => {
 
                     return (
                       <tr key={name}>
-
                         <td className={classes}>
                           <Typography
                             variant="small"
@@ -394,16 +388,10 @@ const Dashboard = () => {
                               size="sm"
                               variant="ghost"
                               value={offLine}
-                              color={
-                                onLine
-                                  ? "Online"
-
-                                  : "red"
-                              }
+                              color={onLine ? "Online" : "red"}
                             />
                           </div>
                         </td>
-                    
                       </tr>
                     );
                   }
@@ -411,10 +399,8 @@ const Dashboard = () => {
               </tbody>
             </table>
           </CardBody>
-
         </Card>
       </section>
-
     </div>
   );
 };
