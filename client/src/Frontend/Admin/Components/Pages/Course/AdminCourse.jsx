@@ -48,7 +48,10 @@ const AdminCourse = () => {
   return (
     <div className="m-7 lg:w-full w-full text-white">
       <div>
-        <h1 className="text-2xl lg:text-3xl text-center py-10"> Course List</h1>
+        <h1 className="text-center underline text-cyan-400 text-2xl py-5">
+          {" "}
+          Course List
+        </h1>
       </div>
       <div className=" flex flex-wrap gap-10 ">
         {kurs &&
