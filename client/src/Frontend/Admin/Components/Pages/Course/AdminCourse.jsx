@@ -48,7 +48,7 @@ const AdminCourse = () => {
   return (
     <div className="m-7 lg:w-full w-full text-white">
       <div>
-        <h1 className="text-xl lg:text-3xl text-center py-10"> Course List</h1>
+        <h1 className="text-2xl lg:text-3xl text-center py-10"> Course List</h1>
       </div>
       <div className=" flex flex-wrap gap-10 ">
         {kurs &&
@@ -64,9 +64,11 @@ const AdminCourse = () => {
                 alt="kurs"
               />
 
-              <div className=" absolute top-0 text-white font-semibold ">
-                <p className="  ">Start:{kur?.startDate?.split("T")[0]}</p>
-                <p className=" ">End:{kur?.admissionLastDate?.split("T")[0]}</p>
+              <div className=" px-5 pt-5 text-black font-semibold ">
+                <p className="  ">Start: {kur?.startDate?.split("T")[0]}</p>
+                <p className=" ">
+                  End: {kur?.admissionLastDate?.split("T")[0]}
+                </p>
                 <p className=" "> Running</p>
               </div>
               <div className="p-5">
