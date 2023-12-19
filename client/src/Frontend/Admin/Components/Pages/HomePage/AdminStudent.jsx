@@ -598,27 +598,27 @@ const AdminStudent = () => {
               {list[0]?.name}`s Course Details
             </h1>
 
-            <div className="flex justify-center space-x-10 w-full text-white  overflow-hidden">
-              <div className="w-[23%] p-2  hover:scale-105 duration-300 ease-in bg-[#2E3658] rounded-md shadow-xl">
+            <div className="flex flex-wrap gap-5 w-full text-white  ">
+              <div className=" p-5   bg-[#2E3658] rounded-md shadow-xl">
                 <p className=" font-medium text-center mb-2">Running Course</p>
                 {actKur &&
                   actKur?.map((key) => (
-                    <p key={1}>
-                      <span className=" font-semibold text-white">
+                    <p key={1} className="py-1">
+                      <span className=" font-semibold capitalize text-white">
                         {key[0]}
                       </span>
                       : <span className=" ml-2">{key[1]}</span>{" "}
                     </p>
                   ))}
               </div>
-              <div className="w-[23%] p-2  hover:scale-105 duration-300 ease-in bg-[#2E3658] rounded-md shadow-xl">
+              <div className=" p-5    bg-[#2E3658] rounded-md shadow-xl">
                 <p className=" font-medium text-center mb-2">Next Course</p>
                 {nextKur &&
                   nextKur?.map((link, title) => (
                     <Link
                       key={1}
                       to={link[1].link}
-                      className=" font-medium text-green-500 text-sm block mt-1"
+                      className=" font-medium text-green-500 hover:text-red-400 text-sm block mt-1"
                     >
                       {title + 1}. {link[1].title}{" "}
                     </Link>
@@ -627,106 +627,118 @@ const AdminStudent = () => {
               </div>
             </div>
           </div>
-          <div>
+          <div className="bg-[#2E3658] shadow-xl mt-10 p-3">
             <h1 className="text-center font-bold text-2xl pt-10">
               {list[0]?.name}`s Result
             </h1>
 
-            <div className="flex justify-center mt-4 overflow-hidden ">
-              <div className=" relative p-2 w-[50%] h-[300px]  text-white bg-[#2E3658] rounded-md shadow-xl">
-                <p className=" font-medium mb-2">
-                  {result[given]?.data?.coureName}
-                </p>
-                {myResult &&
-                  myResult?.map((key, i) => (
-                    <>
-                      {myResult.length > i + 2 && (
-                        <p key={i}>
-                          <span className=" font-semibold">{key[0]}</span>:{" "}
-                          <span className=" font-semibold">{key[1]}</span>
-                        </p>
-                      )}
-                    </>
-                  ))}
-                <div className=" w-[340px] hover:scale-105 duration-300 ease-in h-[180px] bg-white absolute top-4 right-4 rounded-lg p-4 flex justify-between">
+            <div className=" mt-4  ">
+              <div
+                className=" grid grid-cols-1 lg:grid-cols-2  gap-10 p-5   text-white 
+              rounded-md "
+              >
+                <div className="border p-5">
+                  <p className=" font-medium text-2xl text-yellow-900 mb-2">
+                    {result[given]?.data?.coureName}
+                  </p>
+                  {myResult &&
+                    myResult?.map((key, i) => (
+                      <ul key={i}>
+                        {myResult.length > i + 2 && (
+                          <li key={i} className="py-1">
+                            <span className="capitalize font-semibold ">
+                              {key[0]}
+                            </span>
+                            : <span className=" font-semibold">{key[1]}</span>
+                          </li>
+                        )}
+                      </ul>
+                    ))}
+                </div>
+                <div
+                  className="  
+                 border  rounded-lg p-4 gap-5 flex justify-between"
+                >
                   <Link
                     to={`${Api.defaults.baseURL}/uploads/${result[given]?.result?.resultImg}`}
-                    className="w-[50%] shadow-xl rounded-md"
+                    className=" shadow-xl rounded-md"
                   >
                     <img
                       src={`${Api.defaults.baseURL}/uploads/${result[given]?.result?.resultImg}`}
                       alt="resul"
-                      className="w-[300px] h-[145px]"
+                      className=" object-contain w-[300px] h-[300px]"
                     />
                   </Link>
 
                   <Link
                     to={`${Api.defaults.baseURL}/uploads/${result[given]?.result?.resultPdf}`}
-                    className="w-[50%]"
+                    className=""
                   >
                     <img
                       src="https://i.ibb.co/k22KtLx/download-pdf-icon-template-black-color-editable-download-pdf-icon-symbol-flat-sign-isolated-on-white.jpg"
                       alt="resul"
+                      className=" object-contain w-[300px] h-[300px] pb-3"
                     />
+                    <span className="px-2 py-2  bg-red-400"> Download</span>
                   </Link>
                 </div>
-                {myResult && (
-                  <div className="flex justify-end  space-x-6 ">
-                    <p
-                      onClick={() =>
-                        setGiv(given === result.length - 1 ? 0 : given + 1)
-                      }
-                      className=" text-end font-medium cursor-pointer"
-                    >
-                      NEXT
-                    </p>
-                    <p
-                      onClick={() =>
-                        setGiv(given - 1 === -1 ? result.length - 1 : given - 1)
-                      }
-                      className=" text-start font-medium cursor-pointer "
-                    >
-                      PREV
-                    </p>
-                  </div>
-                )}
-                {!myResult && (
-                  <>
-                    <p
-                      onClick={() =>
-                        setGiv(given === result.length - 1 ? 0 : given + 1)
-                      }
-                      className=" text-start ml-[140px]   font-medium cursor-pointer"
-                    >
-                      NEXT
-                    </p>
-                    <p
-                      onClick={() =>
-                        setGiv(given - 1 === -1 ? result.length - 1 : given - 1)
-                      }
-                      className=" text-start ml-[140px] mt-4 font-medium cursor-pointer "
-                    >
-                      PREV
-                    </p>
-                  </>
-                )}
-              </div>
+              </div>{" "}
+              {myResult && (
+                <div className="flex justify-end pt-5  space-x-6 ">
+                  <p
+                    onClick={() =>
+                      setGiv(given === result.length - 1 ? 0 : given + 1)
+                    }
+                    className=" text-end font-medium cursor-pointer"
+                  >
+                    NEXT
+                  </p>
+                  <p
+                    onClick={() =>
+                      setGiv(given - 1 === -1 ? result.length - 1 : given - 1)
+                    }
+                    className=" text-start font-medium cursor-pointer "
+                  >
+                    PREV
+                  </p>
+                </div>
+              )}
+              {!myResult && (
+                <>
+                  <p
+                    onClick={() =>
+                      setGiv(given === result.length - 1 ? 0 : given + 1)
+                    }
+                    className=" text-start ml-[140px]   font-medium cursor-pointer"
+                  >
+                    NEXT
+                  </p>
+                  <p
+                    onClick={() =>
+                      setGiv(given - 1 === -1 ? result.length - 1 : given - 1)
+                    }
+                    className=" text-start ml-[140px] mt-4 font-medium cursor-pointer "
+                  >
+                    PREV
+                  </p>
+                </>
+              )}
             </div>
           </div>
-
-          <h1 className="text-center font-bold text-2xl pt-10">
-            {list[0]?.name}`s Payment Details
-          </h1>
-
-          <div className="flex justify-center mt-4 overflow-hidden relative ">
-            <div className=" relative p-2 w-[50%] h-[300px]  text-white bg-[#2E3658] rounded-md shadow-xl">
+          <div className=" mt-4 bg-[#2E3658]  ">
+            <h1 className="text-center font-bold text-2xl py-10">
+              {list[0]?.name}`s Payment Details
+            </h1>
+            <div className="  p-5 border    text-white   rounded-md shadow-xl">
               <p className=" font-medium mb-2">{inv[givenInv]?.reason}</p>
               {myInv &&
                 myInv?.map((key, i) => (
                   <>
-                    <p key={i}>
-                      <span className=" font-semibold">{key[0]}</span>:{" "}
-                      <span className=" font-semibold">{key[1]}</span>
+                    <p key={i} className="py-1">
+                      <span className=" font-semibold capitalize">
+                        {key[0]} :
+                      </span>
+                      <span className=" "> {key[1]}</span>
                     </p>
                   </>
                 ))}
@@ -755,7 +767,7 @@ const AdminStudent = () => {
             )}
           </div>
           {/* ################# permission ######################## start */}
-          <div className="flex justify-center mt-4 overflow-hidden relative">
+          <div className=" mt-4 hidden">
             <div className=" relative p-2 w-[50%] h-[300px]  text-white bg-[#2E3658] rounded-md shadow-xl">
               <p className="text-center">
                 Permission :{list[0]?.changePermission}
