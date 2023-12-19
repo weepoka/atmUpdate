@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import {
   Button,
-
   Input,
-
   Option,
   Select,
   Textarea,
@@ -12,11 +10,11 @@ import {
 
 import { Controller, useForm } from "react-hook-form";
 
-import Api from "./Api"
+import Api from "./Api";
 
 const AddBannerAndMoments = () => {
-  const [banData, setBan] = useState("")
-  const [banDataa, setBana] = useState([""])
+  const [banData, setBan] = useState("");
+  const [banDataa, setBana] = useState([""]);
   const {
     register,
     handleSubmit,
@@ -37,7 +35,7 @@ const AddBannerAndMoments = () => {
       formData.append("offer", data.offer);
       formData.append("sub", data.sub);
       formData.append("detail", data.detail);
-      console.log(data.url[0])
+      console.log(data.url[0]);
 
       const res = await Api.post("/atms/api/v1/banner", formData, {
         headers: {
@@ -54,59 +52,50 @@ const AddBannerAndMoments = () => {
     }
   };
 
-
   //###### get Banner start ##########
-
-
-
-
-
 
   const isBanner = async () => {
     try {
-      const res = await Api.get("/atms/api/v1/banner")
+      const res = await Api.get("/atms/api/v1/banner");
 
       if (res.data.length > 0) {
-        console.log(res.data)
-        setBana(res.data)
+        console.log(res.data);
+        setBana(res.data);
       }
-
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
 
-  console.log("getBann:", banDataa)
+  console.log("getBann:", banDataa);
   //###### get Banner end ##########
   //###### banner delete star ##########
 
   //  course del #######
   const handelDel = async (id) => {
     try {
-      const confrim = window.confirm("Are you sure?")
+      const confrim = window.confirm("Are you sure?");
       if (!confrim) {
-        return
+        return;
       }
 
-      await Api.delete(`/atms/api/v1/banner/${id}`)
-      alert("Banner Deleted")
-      isBanner()
-
+      await Api.delete(`/atms/api/v1/banner/${id}`);
+      alert("Banner Deleted");
+      isBanner();
     } catch (err) {
-      console.error("Error reason:", err)
-
+      console.error("Error reason:", err);
     }
-  }
+  };
   //###### banner delete end ##########
   //############### useEff######
   useEffect(() => {
-    isBanner()
-  }, [])
+    isBanner();
+  }, []);
   //############### useEff######
 
   return (
-    <div>
-      <div className="m-7 lg:w-full w-[60%] text-white">
+    <div className="m-7 lg:w-full w-[60%] text-white">
+      <div>
         <div className="py-5">
           <Typography
             variant="h3"
@@ -164,8 +153,6 @@ const AddBannerAndMoments = () => {
                   />
                   {errors.offer && <p>Title2 is required and must be valid</p>}
                 </div>
-
-
               </div>
             </div>
             <div className=" mb-7 px-5">
@@ -214,9 +201,7 @@ const AddBannerAndMoments = () => {
                  rounded w-full max-w-xs lg:max-w-lg xl:max-w-xl 2xl:min-w-full"
                     label="SubTitle "
                   />
-                  {errors.sub && (
-                    <p>SubTitle is required and must be valid</p>
-                  )}
+                  {errors.sub && <p>SubTitle is required and must be valid</p>}
                 </div>
               </div>
             </div>
@@ -245,8 +230,6 @@ const AddBannerAndMoments = () => {
                 </div>
               </div>
             </div>
-
-
           </div>
 
           <div className="border rounded-md mt-10">
@@ -291,45 +274,67 @@ const AddBannerAndMoments = () => {
             </div>
           </div>
           <div className="text-center pt-10">
-            <Button type="submit" className="bg-blue-600 px-10">
-              Add Blog
+            <Button type="submit" className="bg-blue-600 text-xl px-20">
+              Add
             </Button>
           </div>
         </form>
       </div>
 
-      <div className=" flex flex-wrap gap-4 ">
-        {banDataa && banDataa?.map((kur, i) => (
+      <div className=" flex flex-wrap gap-10 px-6 py-5 ">
+        {banDataa &&
+          banDataa?.map((kur, i) => (
+            <div
+              key={i}
+              className="max-w-sm relative bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <img
+                loading="lazy"
+                className="rounded-t-lg object-fill w-[400px] h-[200px]"
+                src={`${Api.defaults.baseURL}/uploads/${kur?.url}`}
+                alt="kurs"
+              />
 
-          <div key={i} className="max-w-sm relative bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-
-            <img loading="lazy" className="rounded-t-lg object-fill w-[400px] h-[200px]" src={`${Api.defaults.baseURL}/uploads/${kur?.url}`} alt="kurs" />
-
-
-            <div className="p-5">
-              <a href="#">
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{kur?.position}</h5>
-
-              </a>
-
-              <div className="flex justify-between">
-                <a href={`/`} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Detail
-                  <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                  </svg>
+              <div className="p-5">
+                <a href="#">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {kur?.position}
+                  </h5>
                 </a>
 
-                <p onClick={() => handelDel(kur._id)} className="inline-flex cursor-pointer items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Delete
+                <div className="flex justify-between">
+                  <a
+                    href={`/`}
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Detail
+                    <svg
+                      className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 10"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M1 5h12m0 0L9 1m4 4L9 9"
+                      />
+                    </svg>
+                  </a>
 
-                </p>
+                  <p
+                    onClick={() => handelDel(kur._id)}
+                    className="inline-flex cursor-pointer items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Delete
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-
-        ))}
-
+          ))}
       </div>
     </div>
   );

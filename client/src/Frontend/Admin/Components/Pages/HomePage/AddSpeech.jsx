@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Checkbox,
@@ -11,7 +11,7 @@ import {
 } from "@material-tailwind/react";
 
 import { Controller, useForm } from "react-hook-form";
-import Api from "./Api"
+import Api from "./Api";
 
 const AddSpeech = () => {
   const {
@@ -22,18 +22,12 @@ const AddSpeech = () => {
     formState: { errors },
   } = useForm();
 
-  const [speech, setSpeech] = useState("")
-  const [speechh, setSpeechh] = useState([""])
+  const [speech, setSpeech] = useState("");
+  const [speechh, setSpeechh] = useState([""]);
   const onSubmit = async (data) => {
     console.log(data);
     try {
-
-
-
       // Add other form data properties
-
-
-
 
       const res = await Api.post("/atms/api/v1/video", data);
 
@@ -46,48 +40,44 @@ const AddSpeech = () => {
     }
   };
 
-
   // get video start##############
-
 
   const isBanner = async () => {
     try {
-      const res = await Api.get("/atms/api/v1/video")
-      console.log("hello", res)
+      const res = await Api.get("/atms/api/v1/video");
+      console.log("hello", res);
       if (res.data.length > 0) {
-        console.log(res.data)
-        setSpeechh(res.data)
+        console.log(res.data);
+        setSpeechh(res.data);
       }
-
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
 
   // get video end ##############
   // del video start ##############
 
   const videoDel = async (id) => {
     try {
-
-      const confirm = window.confirm("Are you sure?")
+      const confirm = window.confirm("Are you sure?");
       if (!confirm) {
-        return
+        return;
       }
 
-      await Api.delete(`/atms/api/v1/video/${id}`)
-      isBanner()
-      alert("success")
+      await Api.delete(`/atms/api/v1/video/${id}`);
+      isBanner();
+      alert("success");
     } catch (error) {
-      console.log("Error:", error.status)
+      console.log("Error:", error.status);
     }
-  }
+  };
   // del video end ##############
   // ############## log start  ##############
   useEffect(() => {
-    isBanner()
-  }, [])
-  console.log("sp:", speechh)
+    isBanner();
+  }, []);
+  console.log("sp:", speechh);
   //############### log end ##############
   return (
     <div>
@@ -159,7 +149,6 @@ const AddSpeech = () => {
               </div>
             </div>
 
-
             <div className=" mb-7 px-5">
               <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-20">
                 <div>
@@ -185,48 +174,48 @@ const AddSpeech = () => {
                 </div>
               </div>
             </div>
-
-
           </div>
-
 
           <div className="text-center pt-10">
             <Button type="submit" className="bg-blue-600 px-10">
-              Add Blog
+              Add speech
             </Button>
           </div>
         </form>
         <div className=" flex flex-wrap gap-4 text-white">
-          {speechh && speechh?.map((item, i) => (
-            <div key={i} className=" shadow-lg border-gray-200">
-              <iframe
-                width="230"
-                height="270"
-                src={`https://www.youtube.com/embed/${item.link}`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                className="md:w-full w-full rounded-md aspect-video"
-              ></iframe>
+          {speechh &&
+            speechh?.map((item, i) => (
+              <div key={i} className=" shadow-lg border-gray-200">
+                <iframe
+                  width="230"
+                  height="270"
+                  src={`https://www.youtube.com/embed/${item.link}`}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                  className="md:w-full w-full rounded-md aspect-video"
+                ></iframe>
 
-              <div className="text-white">
-                <h1 className=" text-base text-justify py-3 font-semibold">
-                  {item.title}
-                </h1>
-                <p className="text-justify leading-relaxed text-sm">
-                  {item.description}
-                </p>
+                <div className="text-white">
+                  <h1 className=" text-base text-justify py-3 font-semibold">
+                    {item.title}
+                  </h1>
+                  <p className="text-justify leading-relaxed text-sm">
+                    {item.description}
+                  </p>
+                </div>
+                <button
+                  onClick={() => videoDel(item._id)}
+                  className="text-center w-full  px-4 py-2 rounded-md shadow-lg text-white bg-red-700"
+                >
+                  Delete
+                </button>
               </div>
-              <button onClick={() => videoDel(item._id)} className="text-center w-full text-cyan-800 px-4 py-2 rounded-md shadow-lg bg-orange-700">Delete</button>
-            </div>
-          ))
-          }
+            ))}
         </div>
       </div>
-
-
-    </div >
+    </div>
   );
 };
 

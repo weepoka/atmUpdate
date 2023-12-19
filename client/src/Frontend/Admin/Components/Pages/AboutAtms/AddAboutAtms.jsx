@@ -1,7 +1,7 @@
 import { Button, Input, Textarea, Typography } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import Api from "../../../../../Api"
+import Api from "../../../../../Api";
 
 const AddAboutAtms = () => {
   const {
@@ -16,7 +16,7 @@ const AddAboutAtms = () => {
   const [newSpecalities, setNewSpecalities] = React.useState({
     skill: "",
   });
-  const [atmm, setAtmm] = useState([""])
+  const [atmm, setAtmm] = useState([""]);
   const handleInputChange1 = (event) => {
     const { name, value } = event.target;
 
@@ -48,7 +48,7 @@ const AddAboutAtms = () => {
 
     setSpecalities(updatedSpecalities);
   };
-  const [atm, setAtm] = useState("")
+  const [atm, setAtm] = useState("");
   const onSubmit = async (data) => {
     console.log(data);
 
@@ -67,8 +67,7 @@ const AddAboutAtms = () => {
         formData.append(`specalities[${index}][skill]`, speciality.skill);
       });
 
-
-      console.log(data.url[0])
+      console.log(data.url[0]);
 
       const res = await Api.post("/atms/api/v1/atmsir", formData, {
         headers: {
@@ -83,28 +82,26 @@ const AddAboutAtms = () => {
     } catch (error) {
       console.log(error.message);
     }
-
   };
   ///  ###################### get atm's start #####
   const getAtm = async () => {
     try {
-      const res = await Api.get("/atms/api/v1/atmsir")
+      const res = await Api.get("/atms/api/v1/atmsir");
 
       if (res.data.length > 0) {
-        console.log(res.data)
-        setAtmm(res.data[res.data.length - 1])
+        console.log(res.data);
+        setAtmm(res.data[res.data.length - 1]);
       }
-
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
   ///  ###################### get atm's end #####
   useState(() => {
-    getAtm()
-  }, [])
+    getAtm();
+  }, []);
   ///  ###################### log here start #####
-  console.log("atmm:", atmm)
+  console.log("atmm:", atmm);
   ///  ###################### log here end #####
   return (
     <div className="m-7 lg:w-full w-[60%] text-white">
@@ -339,7 +336,7 @@ const AddAboutAtms = () => {
                         Remove
                       </Button>
                     </p>
-                    <ul>
+                    <ul className="">
                       {Object.entries(offline).map(([key, value]) => (
                         <li key={key} className="capitalize">
                           <span>{key}</span> : <span>{value}</span>
@@ -359,15 +356,28 @@ const AddAboutAtms = () => {
         </div>
       </form>
 
-
-
-      {atmm && Object.entries(atmm).map((item, i) => (
-        <>
-          <p key={i}>{item[0]} : {item[0] === "url" ? <img className="w-[300px] h-[280px] rounded-md shadow-lg bg-orange-600" src={`${Api.defaults.baseURL}/uploads/${item[1]}`} /> : item[1]}</p>
-
-
-        </>
-      ))}
+      <div className="border rounded p-3">
+        {atmm &&
+          Object.entries(atmm).map((item, i) => (
+            <div key={i}>
+              <p key={i} className="py-1">
+                <span className="capitalize text-md font-semibold">
+                  {" "}
+                  {item[0]}{" "}
+                </span>
+                :{" "}
+                {item[0] === "url" ? (
+                  <img
+                    className="w-[300px] h-[280px] py-2 rounded-md shadow-lg "
+                    src={`${Api.defaults.baseURL}/uploads/${item[1]}`}
+                  />
+                ) : (
+                  item[1]
+                )}
+              </p>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
