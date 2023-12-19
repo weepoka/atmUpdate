@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Checkbox,
@@ -12,7 +12,7 @@ import {
 
 import { Controller, useForm } from "react-hook-form";
 
-import Api from "../../../../../Api"
+import Api from "../../../../../Api";
 // const allowedExtensions = ["jpg", "jpeg", "png", "webp"];
 
 // const isFileAllowed = (fileName) => {
@@ -27,11 +27,9 @@ const AddBlog = () => {
     control,
     formState: { errors },
   } = useForm();
-  const [blog, setBlog] = useState("")
+  const [blog, setBlog] = useState("");
   const onSubmit = async (data) => {
     console.log("adh:", data);
-
-
 
     try {
       const formData = new FormData();
@@ -57,7 +55,6 @@ const AddBlog = () => {
     } catch (error) {
       console.log(error.message);
     }
-
   };
   return (
     <div className="m-7 lg:w-full w-[60%] text-white">
@@ -144,7 +141,6 @@ const AddBlog = () => {
                   })}
                   size="lg"
                   color="blue"
-
                   //   onChange={handleFileChange}
                   className="border py-2 px-5 
                  rounded w-full max-w-xs lg:max-w-lg xl:max-w-xl 2xl:min-w-full"
