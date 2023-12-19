@@ -46,24 +46,21 @@ const AddBannerAndMoments = () => {
     formData.append("admissionLastDate", data.admissionLastDate);
     formData.append("startDate", data.startDate);
 
-
-    formData.append("offlineFee", JSON.stringify(data.offlineFee))
-
-
+    formData.append("offlineFee", JSON.stringify(data.offlineFee));
 
     formData.append("onlineFee", JSON.stringify(data.onlineFee));
-    //onlineFee.bookFee sub input field 
+    //onlineFee.bookFee sub input field
 
     formData.append("version", data.version);
-    console.log(formData)
+    console.log(formData);
 
     try {
       const res = await Api.post("/atms/api/v1/course", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      })
-      console.log("Kurs:", res.data.data)
+      });
+      console.log("Kurs:", res.data.data);
     } catch (err) {
       console.error("Error submitting form:", err);
     }
@@ -88,14 +85,14 @@ const AddBannerAndMoments = () => {
             </div>
 
             <div className=" mb-7 px-5">
-              <div className="grid grid-cols-1 lg:grid-cols-1 lg:gap-20">
-                <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-20">
+              <div className=" ">
+                <div className="flex justify-between  flex-col lg:flex-row py-5">
                   <div>
                     <label className="mb-2 md:text-lg text-gray-400">
                       Course Title
                     </label>
                   </div>
-                  <div>
+                  <div className="lg:lg:w-[46%]">
                     {/* Dropdown for Course Title */}
                     <Controller
                       name="title"
@@ -115,13 +112,13 @@ const AddBannerAndMoments = () => {
                     {errors.title && <p>Course title is required</p>}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-20">
+                <div className="flex justify-between flex-col lg:flex-row py-5">
                   <div>
                     <label className="mb-2 md:text-lg text-gray-400">
                       Version
                     </label>
                   </div>
-                  <div>
+                  <div className="lg:w-[46%]">
                     {/* Dropdown for Course Title      */}
 
                     <Controller
@@ -140,16 +137,13 @@ const AddBannerAndMoments = () => {
                       )}
                     />
                     {errors.version && <p>Version is required</p>}
-
-
                   </div>
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-20 ">
+                <div className="flex justify-between flex-col lg:flex-row py-5 ">
                   <label className="mb-2 md:text-md  text-gray-400">
                     Duration
                   </label>
-                  <div className="">
-
+                  <div className="lg:w-[46%]">
                     {/* <Select
                       className="w-[100%]"
                       color="blue"
@@ -173,7 +167,6 @@ const AddBannerAndMoments = () => {
                         </Select>
                       )}
                     />
-
                   </div>
 
                   {errors.courseDuration && (
@@ -181,12 +174,12 @@ const AddBannerAndMoments = () => {
                   )}
                 </div>
 
-                <div className="flex justify-between ">
+                <div className="flex justify-between flex-col lg:flex-row py-5">
                   <label className=" md:text-md  text-gray-400">
                     Start Date
                   </label>
-                  <div className="w-[46%]">
-                    <input
+                  <div className="lg:w-[46%]">
+                    <Input
                       type="date"
                       {...register("startDate", {
                         required: true,
@@ -201,36 +194,36 @@ const AddBannerAndMoments = () => {
                     {errors.startDate && (
                       <p>Start Date is required and must be valid</p>
                     )}
-
                   </div>
                 </div>
-                <div className="flex justify-between ">
+                <div className="flex justify-between flex-col lg:flex-row py-5">
                   <label className=" md:text-md  text-gray-400">
                     Last Date
                   </label>
-                  <div className="w-[46%]">
-                    <input
+                  <div className="lg:w-[46%]">
+                    <Input
                       type="date"
                       {...register("admissionLastDate", {
                         required: true,
                       })}
                       color="blue"
-                      className="border w-[46%]  text-gray-400
+                      className="border   text-gray-400
                  rounded w-"
                       label=" Last Date"
                       placeholder="yyyy-mm-dd"
                     />
                     {errors.admissionLastDate && (
                       <p>Last Date is required and must be valid</p>
-                    )} </div>
+                    )}{" "}
+                  </div>
                 </div>
 
-                <div className="flex justify-between ">
+                <div className="flex justify-between flex-col lg:flex-row py-3">
                   <label className=" md:text-md  text-gray-400">
                     Classes Number
                   </label>
-                  <div className="w-[46%]">
-                    <input
+                  <div className="lg:w-[46%]">
+                    <Input
                       type="number"
                       {...register("classesNumber", {
                         required: true,
@@ -245,12 +238,12 @@ const AddBannerAndMoments = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex justify-between   ">
+                <div className="flex justify-between  flex-col lg:flex-row py-3 ">
                   <label className="mb-2 md:text-md  text-gray-400">
-                    Extar Class
+                    Extra Class
                   </label>
-                  <div className="w-[46%]">
-                    <input
+                  <div className="lg:w-[46%]">
+                    <Input
                       type="number"
                       {...register("extarClass", {
                         required: true,
@@ -265,12 +258,12 @@ const AddBannerAndMoments = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex justify-between  ">
+                <div className="flex justify-between  flex-col lg:flex-row py-3">
                   <label className=" md:text-md  text-gray-400">
                     Mock Test Cost
                   </label>
-                  <div className="w-[46%]">
-                    <input
+                  <div className="lg:w-[46%]">
+                    <Input
                       type="text"
                       {...register("mockTest", {
                         required: true,
@@ -287,13 +280,13 @@ const AddBannerAndMoments = () => {
                 </div>
               </div>
             </div>
-            <div className=" grid grid-cols-1 lg:grid-cols-2 lg:gap-20 px-4 ">
+            <div className=" flex justify-between  flex-col lg:flex-row px-4 ">
               <label className=" md:text-lg  text-gray-400">
                 Image (size 2000px * 700px)
               </label>
 
-              <div className="w-[46%]">
-                <input
+              <div className="lg:w-[46%] pt-2">
+                <Input
                   type="file"
                   {...register("url", {
                     required: "Image is required",
@@ -324,7 +317,7 @@ const AddBannerAndMoments = () => {
                       </label>
                     </div>
                     <div>
-                      <input
+                      <Input
                         type="number"
                         {...register("onlineFee.courseFee", {
                           required: false,
@@ -351,7 +344,7 @@ const AddBannerAndMoments = () => {
                       </label>
                     </div>
                     <div>
-                      <input
+                      <Input
                         type="number"
                         {...register("onlineFee.bookFee", {
                           required: false,
@@ -377,7 +370,7 @@ const AddBannerAndMoments = () => {
                       </label>
                     </div>
                     <div>
-                      <input
+                      <Input
                         type="number"
                         {...register("onlineFee.totalFee", {
                           required: false,
@@ -406,7 +399,7 @@ const AddBannerAndMoments = () => {
                       </label>
                     </div>
                     <div>
-                      <input
+                      <Input
                         type="number"
                         {...register("offlineFee.courseFee", {
                           required: false,
@@ -433,7 +426,7 @@ const AddBannerAndMoments = () => {
                       </label>
                     </div>
                     <div>
-                      <input
+                      <Input
                         type="number"
                         {...register("offlineFee.bookFee", {
                           required: false,
@@ -459,7 +452,7 @@ const AddBannerAndMoments = () => {
                       </label>
                     </div>
                     <div>
-                      <input
+                      <Input
                         type="number"
                         {...register("offlineFee.totalFee", {
                           required: false,
