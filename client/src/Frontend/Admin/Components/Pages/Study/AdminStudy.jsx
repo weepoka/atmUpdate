@@ -81,7 +81,7 @@ const AdminStudy = () => {
       <h1 className="text-center font-semibold text-2xl pb-10">Add Country</h1>
 
       <div>
-        <div className="mb-7 px-5 flex flex-col ">
+        <div className="mb-7  flex flex-col ">
           <label className="mb-2 md:text-lg text-white">Image</label>
           <div>
             <Input
@@ -95,7 +95,7 @@ const AdminStudy = () => {
           </div>
         </div>
 
-        <div className="mb-7 px-5">
+        <div className="mb-7">
           <label className="mb-2 md:text-lg text-white">Country Name</label>
           <select
             color="blue"
@@ -114,7 +114,7 @@ const AdminStudy = () => {
           </select>
         </div>
 
-        <div className="mb-7 px-5">
+        <div className="mb-7 ">
           <label className="mb-2 md:text-lg text-white">About </label>
           <textarea
             type="text"
@@ -130,7 +130,7 @@ const AdminStudy = () => {
       <div className="text-end font-semibold flex justify-center mr-5 my-5">
         <button
           type="button"
-          className="bg-red-500 p-4 rounded-md hover:bg-red-700 duration-300 ease-in "
+          className="bg-red-500 w-full py-2 lg:w-52 rounded-md hover:bg-red-700 duration-300 ease-in "
           onClick={onSubmit}
         >
           {err ? err : "Add"}
