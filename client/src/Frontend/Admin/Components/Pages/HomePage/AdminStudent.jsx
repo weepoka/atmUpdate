@@ -464,7 +464,7 @@ const AdminStudent = () => {
                     />
                   </div>
                   <div className="mb-2 flex justify-between items-center gap-1">
-                    Mark:
+                    Marks:
                     <input
                       className="bg-[#2E3658]
                   text-white border rounded w-96 py-2 px-2"
